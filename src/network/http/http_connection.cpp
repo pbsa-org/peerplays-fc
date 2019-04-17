@@ -226,13 +226,13 @@ fc::tcp_socket& connection::get_socket()const {
 
 http::request connection::read_request()const {
   http::request req;
-  const size_t buffer_length = 1024 * 8;
-  std::shared_ptr<char> line(new char[buffer_length], [](char* p){ delete[] p; });
-  size_t bytes_read = my->read_until(line, buffer_length, ' '); // METHOD
-  req.method = std::string(line.get(), bytes_read);
-  bytes_read = my->read_until(line, buffer_length, ' '); // PATH
-  req.path = std::string(line.get(), bytes_read);
-  bytes_read = my->read_until(line, buffer_length, '\n'); // HTTP/1.0
+  req.remote_endpoint = fc::variant(get_socket().remote_endpoint()).as_string();
+  std::vector<char> line(1024*8);
+  int s = my->read_until( line.data(), line.data()+line.size(), ' ' ); // METHOD
+  req.method = line.data();
+  s = my->read_until( line.data(), line.data()+line.size(), ' ' ); // PATH
+  req.path = line.data();
+  s = my->read_until( line.data(), line.data()+line.size(), '\n' ); // HTTP/1.0
   
   while( (bytes_read = my->read_until(line, buffer_length, '\n')) > 1 ) 
   {
