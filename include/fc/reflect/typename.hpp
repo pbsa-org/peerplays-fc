@@ -70,9 +70,7 @@ namespace fc {
      } 
   };
 
-  struct signed_int;
   struct unsigned_int;
-  template<> struct get_typename<signed_int>   { static const char* name()   { return "signed_int";   } };
   template<> struct get_typename<unsigned_int>   { static const char* name()   { return "unsigned_int";   } };
 
 }
