@@ -121,11 +121,30 @@ namespace fc {
                 left -= 1024;
              }
              s.read( buf, left );
+             /*
+             s.seekp( s.tellp() + (size.value - sizeof(Storage)) );
+             char tmp;
+             size.value -= sizeof(storage);
+             while( size.value ){ s.read( &tmp, 1 ); --size.value; }
+             */
+           //  s.skip( size.value - sizeof(Storage) );
           } else {
              s.read( (char*)&u.data, size.value );
           }
        }
     }
+
+    /*
+    template<typename Stream, typename... Args>
+    inline void pack( Stream& s, const boost::multiprecision::number<Args...>& d ) {
+       s.write( (const char*)&d, sizeof(d) );
+    }
+
+    template<typename Stream, typename... Args>
+    inline void unpack( Stream& s, boost::multiprecision::number<Args...>& u ) {
+       s.read( (const char*)&u, sizeof(u) );
+    }
+    */
   }
 }
 

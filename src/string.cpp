@@ -312,7 +312,6 @@ namespace fc  {
       }
       return ss.str();
    }
-
 } // namespace fc
 
 

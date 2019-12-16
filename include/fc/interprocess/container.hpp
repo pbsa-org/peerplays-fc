@@ -104,6 +104,8 @@ namespace fc {
             size_t r = fc::from_hex( str, d.data(), d.size() );
             FC_ASSERT( r == d.size() );
          }
+    //   std::string b64 = base64_decode( var.as_string() );
+    //   vo = std::vector<char>( b64.c_str(), b64.c_str() + b64.size() );
     }
 
    namespace raw {
