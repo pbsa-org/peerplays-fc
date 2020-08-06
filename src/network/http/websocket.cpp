@@ -152,7 +152,7 @@ namespace fc { namespace http {
             :_ws_connection(con){
             }
 
-            ~websocket_connection_impl()
+            virtual ~websocket_connection_impl()
             {
             }
 
