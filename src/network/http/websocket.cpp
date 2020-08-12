@@ -132,12 +132,8 @@ namespace fc { namespace http {
          typedef websocketpp::transport::asio::tls_socket::endpoint socket_type;
          };
 
-         typedef websocketpp::transport::asio::endpoint<transport_config>
-         transport_type;
+         typedef websocketpp::transport::asio::endpoint<transport_config>  transport_type;
       };
-
-
-
 
 
       using websocketpp::connection_hdl;
@@ -399,17 +395,6 @@ namespace fc { namespace http {
       };
 
 
-
-
-
-
-
-
-
-
-
-
-
       typedef websocketpp::client<asio_with_stub_log> websocket_client_type;
       typedef websocketpp::client<asio_tls_stub_log> websocket_tls_client_type;
 
@@ -465,6 +450,8 @@ namespace fc { namespace http {
                if( _closed )
                   _closed->wait();
             }
+
+            
             fc::promise<void>::ptr             _connected;
             fc::promise<void>::ptr             _closed;
             fc::thread&                        _client_thread;
@@ -622,7 +609,7 @@ namespace fc { namespace http {
    { try {
        if( uri.substr(0,4) == "wss:" )
           return secure_connect(uri);
-       FC_ASSERT( uri.substr(0,3) == "ws:" );
+        FC_ASSERT( uri.substr(0,4) == "wss:" || uri.substr(0,3) == "ws:", "Unsupported protocol" );
 
        // wlog( "connecting to ${uri}", ("uri",uri));
        websocketpp::lib::error_code ec;
@@ -650,7 +637,8 @@ namespace fc { namespace http {
    { try {
        if( uri.substr(0,3) == "ws:" )
           return connect(uri);
-       FC_ASSERT( uri.substr(0,4) == "wss:" );
+        FC_ASSERT( uri.substr(0,4) == "wss:" || uri.substr(0,3) == "ws:", "Unsupported protocol" );
+
        // wlog( "connecting to ${uri}", ("uri",uri));
        websocketpp::lib::error_code ec;
 
