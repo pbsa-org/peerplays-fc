@@ -1,0 +1,1 @@
+cmd='/home/pbattu/freelance/gitlab/peerplays/libraries/fc/vendor/editline/configure;--prefix=/home/pbattu/freelance/gitlab/peerplays/libraries/fc/vendor/editline'
