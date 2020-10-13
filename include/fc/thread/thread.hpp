@@ -112,6 +112,11 @@ namespace fc {
        */
       void quit();
      
+           /**
+       * Send signal to underlying native thread. Only for Linux and macOS
+       */
+      void signal(int);
+      
       /**
        *  @return true unless quit() has been called.
        */
