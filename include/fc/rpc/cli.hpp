@@ -25,15 +25,12 @@ namespace fc { namespace rpc {
 
          void start();
          void stop();
-         void cancel();
          void wait();
          void format_result( const string& method, std::function<string(variant,const variants&)> formatter);
 
-         virtual void getline( const std::string& prompt, std::string& line );
+         virtual void getline( const fc::string& prompt, fc::string& line );
 
          void set_prompt( const string& prompt );
-
-         void set_regex_secret( const string& expr );
 
       private:
          void run();
@@ -41,6 +38,5 @@ namespace fc { namespace rpc {
          std::string _prompt = ">>>";
          std::map<string,std::function<string(variant,const variants&)> > _result_formatters;
          fc::future<void> _run_complete;
-         fc::thread* _getline_thread = nullptr; ///< Wait for user input in this thread
    };
 } } 
