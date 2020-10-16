@@ -229,6 +229,7 @@ void cli::getline( const fc::string& prompt, fc::string& line)
    if( _isatty( _fileno( stdin ) ) )
 #endif
    {
+      el_hist_size = 256;
       rl_set_complete_func(my_rl_complete);
       rl_set_list_possib_func(cli_completion);
       static fc::thread getline_thread("getline");
